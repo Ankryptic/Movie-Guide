@@ -1,10 +1,53 @@
 const searchForm = document.querySelector('form');
 const movieContainer = document.querySelector('.movie-container');
-const inputBox = document.querySelector('inputBox');
+const inputBox = document.querySelector('.inputBox');
 
+// Function to fetch movie details using OMDB API
+const getMovieInfo =  async(movie) => {
+    const myApikey = "997ef2dd";
+    const url = `http://www.omdbapi.com/?apikey=${myApikey}&t=${movie}`;
 
-URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=997ef2dd';
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    showMovieData(data);
+}
 
-searchForm.addEventListener('submit', () => {
-    console.log(inputBox.value);
+const showMovieData = (data) => {
+    movieContainer.innerHTML = '';
+
+    // Use Destructuring assgnment to extract properties from data object
+    const {Title, imdbRating, Genre, Released, Runtime, Actors, Plot, Poster} = data;
+
+    const movieElement = document.createElement('div');
+    movieElement.classList.add('movie-info');
+    movieElement.innerHTML = `<h2>${Title}</h2>
+                              <p><strong>Rating: &#11088;</strong>${imdbRating}</p>`;
+
+    const movieGenreElement = document.createElement('div');
+    movieGenreElement.classList.add('movie-Genre');
+
+    Genre.split(",").forEach((element) => {
+        const p = document.createElement('p');
+        p.innerText = element;
+        movieGenreElement.appendChild(p);
+    });                                 
+
+    movieElement.appendChild(movieGenreElement);                            
+
+    movieElement.innerHTML += `<p><strong>Released Date: </strong>${Released}</p>
+                               <p><strong>Duration: </strong>${Runtime}</p>
+                               <p><strong>Cast: </strong>${Actors}</p>
+                               <p><strong>Plot: </strong>${Plot}</p>`
+
+    movieContainer.appendChild(movieElement);                            
+}
+
+// Adding Event Listener to search form
+searchForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const movieName = inputBox.value.trim();
+    if(movieName !== ''){
+        getMovieInfo(movieName);
+    }
 })
