@@ -40,6 +40,12 @@ const showMovieData = (data) => {
                                <p><strong>Cast: </strong>${Actors}</p>
                                <p><strong>Plot: </strong>${Plot}</p>`
 
+    // creating a div for movie poster
+    const moviePosterElement = document.createElement('div'); 
+    moviePosterElement.classList.add('movie-poster');
+    moviePosterElement.innerHTML = `<img src="${Poster}" />`
+
+    movieContainer.appendChild(moviePosterElement);
     movieContainer.appendChild(movieElement);                            
 }
 
