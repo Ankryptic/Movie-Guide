@@ -57,10 +57,16 @@ main{
 
 .movie-container {
     display: flex;
+    justify-content: center;
     background: #fff;
     box-shadow: 0px 0px 10px #ccc;
     width: 80%;
     border-radius: 5px;
+}
+
+.movie-container.noBackground {
+    background: none;
+    box-shadow: none;
 }
 
 .movie-poster img{
@@ -69,11 +75,47 @@ main{
     border-radius: 5px 0 0 5px;
 }
 
+.movie-info{
+    padding-inline: 15px;
+}
+
+.movie-info h2 {
+    text-align: center;
+    font-size: 32px;
+    margin: 20px 0 12px 0;
+}
+
+.movie-info h2+p {
+    text-align: center;
+}
+
+.movie-info .movie-Genre p{
+    background: #232F3E;
+    color: #fff;
+    padding: 5px 14px;
+    margin-inline: 5px;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.movie-info .movie-Genre{
+    display: flex;
+    justify-content: center;
+    margin-block: 5px;
+}
+
+.movie-info p {
+    font-size: 18px;
+    margin-block: 16px;
+    line-height: 24px;
+}
+
 main section {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+    min-height: 72vh;
 }
 
 /* Footer Styling */

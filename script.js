@@ -15,6 +15,7 @@ const getMovieInfo =  async(movie) => {
 
 const showMovieData = (data) => {
     movieContainer.innerHTML = '';
+    movieContainer.classList.remove('noBackground');
 
     // Use Destructuring assgnment to extract properties from data object
     const {Title, imdbRating, Genre, Released, Runtime, Actors, Plot, Poster} = data;
@@ -55,5 +56,9 @@ searchForm.addEventListener('submit', (evt) => {
     const movieName = inputBox.value.trim();
     if(movieName !== ''){
         getMovieInfo(movieName);
+    }
+    else{
+        movieContainer.innerHTML = '<h2>Enter Movie name to get movie information</h2>';
+        movieContainer.classList.add('noBackground');
     }
 })
