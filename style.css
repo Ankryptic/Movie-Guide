@@ -9,7 +9,11 @@
 
 body{
     background-color: #f5f5f5;
+    background-image: url(Images/back-image.jpg);
+    background-size: 100% 100vh;
 }
+
+
 
 /* Navbar styling */
 nav{
@@ -23,10 +27,10 @@ nav{
     align-items: center;
     max-width: 1200p;
     margin: 0 auto;
-    padding: 18px;
+    padding-inline: 10px;
 }
 
-.search-container input button{
+.search-container input, button{
     padding: 5px 10px;
     border: none;
     font-size: 16px;
@@ -38,7 +42,7 @@ nav{
 
 .search-container button{
     border-radius: 0 3px 3px 0;
-    background-color: #f5c518;
+    background-color: #ff4a3dda;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -65,8 +69,9 @@ main{
 }
 
 .movie-container.noBackground {
-    background: none;
-    box-shadow: none;
+    background: rgba(255, 255, 255, 0.658);
+    box-shadow: black;
+    align-items: center;
 }
 
 .movie-poster img{
@@ -103,6 +108,7 @@ main{
     display: flex;
     justify-content: center;
     margin-block: 5px;
+    overflow-x: auto;
 }
 
 .movie-info p {
@@ -124,7 +130,55 @@ footer{
     text-align: center;
     background: #232F3E;
     color: white;
-    padding-block: 20px;
+    padding-block: 10px;
     margin-top: 40px;
     font-size: 20px;
+    bottom: 0;
+}
+
+#Watermark{
+    text-decoration:underline;
+    margin-bottom: 2px;
+}
+
+/* Responsive code */
+@media screen and (max-width: 950px) {
+    .movie-container{
+        flex-direction: column;
+    }
+
+    .movie-poster img{
+        width: 100%;
+        height: fit-content;
+        margin-right: 0;
+    }
+
+    .movie-info{
+        padding-inline: 30px;
+    }
+
+    main section{
+        min-height: 80vh;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .navbar{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-container{
+        margin-top: 2px;
+        padding-bottom: 5px;
+    }
+
+    main section{
+        min-height: 75vh;
+    }
+
+    footer{
+        font-size: 12px;
+    }
 }

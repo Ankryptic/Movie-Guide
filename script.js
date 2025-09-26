@@ -4,13 +4,22 @@ const inputBox = document.querySelector('.inputBox');
 
 // Function to fetch movie details using OMDB API
 const getMovieInfo =  async(movie) => {
+    try{
     const myApikey = "997ef2dd";
     const url = `http://www.omdbapi.com/?apikey=${myApikey}&t=${movie}`;
 
     const response = await fetch(url);
+
+    if(!response.ok){
+        throw new Error("Unable to fetch Movie Data.");
+    }
     const data = await response.json();
     
     showMovieData(data);
+    }
+    catch(error) {
+        showErrorMessage('No Movies Found!!');
+    }
 }
 
 const showMovieData = (data) => {
@@ -50,15 +59,24 @@ const showMovieData = (data) => {
     movieContainer.appendChild(movieElement);                            
 }
 
-// Adding Event Listener to search form
-searchForm.addEventListener('submit', (evt) => {
+// Show Function Error Message
+const showErrorMessage = (message) => {
+    movieContainer.innerHTML = `<h2>${message}</h2>`;
+    movieContainer.classList.add('noBackground');
+}
+
+// Function to Handle form Submition
+const handleFormSubmission = (evt) => {
     evt.preventDefault();
     const movieName = inputBox.value.trim();
     if(movieName !== ''){
+        showErrorMessage('Fetching Movie Information......');
         getMovieInfo(movieName);
     }
     else{
-        movieContainer.innerHTML = '<h2>Enter Movie name to get movie information</h2>';
-        movieContainer.classList.add('noBackground');
+        showErrorMessage('Enter Movie name to get movie information');
     }
-})
+}
+
+// Adding Event Listener to search form
+searchForm.addEventListener('submit', handleFormSubmission);
